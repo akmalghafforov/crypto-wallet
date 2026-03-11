@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Currency;
 use App\Enums\BlockchainDepositStatus;
 
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class BlockchainDeposit extends Model
     protected function casts(): array
     {
         return [
+            'currency' => Currency::class,
             'amount' => 'decimal:18',
             'status' => BlockchainDepositStatus::class,
         ];
