@@ -2,23 +2,20 @@
 
 use App\Enums\Currency;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('wallets', function (Blueprint $table) {
-            $table->enum('currency', array_column(Currency::cases(), 'value'))->change();
-        });
+        $values = implode("', '", array_column(Currency::cases(), 'value'));
+        DB::statement('ALTER TABLE wallets DROP CONSTRAINT IF EXISTS wallets_currency_check');
+        DB::statement("ALTER TABLE wallets ADD CONSTRAINT wallets_currency_check CHECK (currency IN ('{$values}'))");
     }
 
     public function down(): void
     {
-        Schema::table('wallets', function (Blueprint $table) {
-            $table->string('currency')->change();
-        });
+        DB::statement('ALTER TABLE wallets DROP CONSTRAINT IF EXISTS wallets_currency_check');
     }
 };
