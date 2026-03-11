@@ -12,9 +12,6 @@ class WithdrawalRequest extends Model
 {
     use HasFactory;
 
-    /**
-     * @var list<string>
-     */
     protected $fillable = [
         'user_id',
         'wallet_id',
@@ -28,9 +25,6 @@ class WithdrawalRequest extends Model
         'processed_at',
     ];
 
-    /**
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [

@@ -11,9 +11,6 @@ class Wallet extends Model
 {
     use HasFactory;
 
-    /**
-     * @var list<string>
-     */
     protected $fillable = [
         'user_id',
         'currency',
@@ -21,9 +18,6 @@ class Wallet extends Model
         'locked_balance',
     ];
 
-    /**
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
